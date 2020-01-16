@@ -4,24 +4,24 @@ const TodoItem = ({ todo, onToggle, onRemove }) => {
     return (
         <div>
             <input 
-                type="checkbox"
+                type="checkbox" 
                 onClick={() => onToggle(todo.id)}
-                // checked={todo.done}
+                checked={todo.done}
                 readOnly={true}
             />
-            {/* <span style={{ textDecoration: todo.done ? 'line-through' : 'none' }}>{todo.text}</span> */}
+            <span style={{ textDecoration: todo.done ? 'line-through' : 'none'}}>{todo.text}</span>
             <button onClick={() => onRemove(todo.id)}>삭제</button>
         </div>
-    )
-}
+    );
+};
 
 const Todos = ({
-    input,  // 인풋에 입력되는 텍스트
-    todos,  // 할 일 목록이 들어 있는 객체
+    input,
+    todos,
     onChangeInput,
     onInsert,
     onToggle,
-    onRemove
+    onRemove,
 }) => {
     const onSubmit = e => {
         e.preventDefault();
@@ -38,11 +38,9 @@ const Todos = ({
                 <button type="submit">등록</button>
             </form>
             <div>
-                <TodoItem />
-                <TodoItem />
-                <TodoItem />
-                <TodoItem />
-                <TodoItem />
+                {todos.map((todo) => (
+                    <TodoItem todo={todo} key={todo.id} onToggle={onToggle} onRemove={onRemove} />
+                ))}
             </div>
         </div>
     )
